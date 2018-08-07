@@ -19,11 +19,11 @@
     // 串行队列 同步执行
 //    [self test1];
     // 串行队列 异步执行
-    [self test2];
+//    [self test2];
     // 并行队列 同步执行
 //    [self test3];
     // 并行队列 异步执行
-//    [self test4];
+    [self test4];
     
     
     /*
@@ -98,18 +98,18 @@
     NSLog(@"开始了");
     dispatch_queue_t serQueue = dispatch_queue_create("feng", DISPATCH_QUEUE_CONCURRENT);
     dispatch_async(serQueue, ^{
-        for (int i = 0; i<10; i++) {
+        for (int i = 0; i<5; i++) {
             NSLog(@"1111-%d --- %@", i, [NSThread currentThread]);
         }
-        for (int i = 0; i<10; i++) {
+        for (int i = 0; i<5; i++) {
             NSLog(@"2222-%d --- %@", i, [NSThread currentThread]);
         }
     });
     dispatch_async(serQueue, ^{
-        for (int i = 0; i<10; i++) {
+        for (int i = 0; i<5; i++) {
             NSLog(@"3333-%d --- %@", i, [NSThread currentThread]);
         }
-        for (int i = 0; i<10; i++) {
+        for (int i = 0; i<5; i++) {
             NSLog(@"4444-%d --- %@", i, [NSThread currentThread]);
         }
     });
