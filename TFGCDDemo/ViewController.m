@@ -119,6 +119,35 @@
 }
 
 /**
+ 栅栏函数
+ */
+- (void)test7 {
+    // 1.创建并发队列
+    dispatch_queue_t queue = dispatch_queue_create("myQueue", DISPATCH_QUEUE_CONCURRENT);
+    // 2.向队列中添加任务
+    dispatch_async(queue, ^{  // 1.2是并行的
+        NSLog(@"任务1, %@",[NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"任务2, %@",[NSThread currentThread]);
+    });
+    
+    dispatch_barrier_async(queue, ^{
+        NSLog(@"任务 barrier, %@", [NSThread currentThread]);
+    });
+    
+    dispatch_async(queue, ^{   // 这两个是同时执行的
+        NSLog(@"任务3, %@",[NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"任务4, %@",[NSThread currentThread]);
+    });
+    
+    // 注意: 输出结果: 任务1 任务2 ——》 任务 barrier ——》任务3 任务4
+    // 其中的任务1与任务2，任务3与任务4 由于是并行处理先后顺序不定。
+}
+
+/**
  普通队列组 (全部加入才开始执行, 并发执行, 开辟线程.)
  */
 - (void)test5 {
