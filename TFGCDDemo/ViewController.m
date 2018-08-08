@@ -27,7 +27,9 @@
     // 队列组
 //    [self test5];
     // 队列组优化版
-    [self test6];
+//    [self test6];
+    // 栅栏函数
+    [self test7];
     /*
      总结:
      1.同步(dispatch_sync)  一进入任务就直接开始执行. 不开辟线程.
